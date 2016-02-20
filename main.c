@@ -2,6 +2,7 @@
 #include "datatypes.h"
 #include "led.h"
 #include "rcc.h"
+#include "util.h"
 
 int main(void){
 
@@ -16,5 +17,6 @@ int main(void){
     /***********************************/
 
     set_debug_led(LED_BLINK);
+
     while(1);
 }
