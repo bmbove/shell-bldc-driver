@@ -51,4 +51,16 @@ typedef enum {
     AF
 } pin_mode;
 
+typedef enum{
+    A_PHASE = 0,
+    B_PHASE = 1,
+    C_PHASE = 2
+} motor_phase_name;
+
+typedef enum{
+    HIGH,
+    LOW,
+    FLOATING
+} phase_status;
+
 #endif
