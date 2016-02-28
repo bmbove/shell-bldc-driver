@@ -63,4 +63,25 @@ typedef enum{
     FLOATING
 } phase_status;
 
+typedef enum{
+    VA,
+    VB,
+    VC
+} phase_voltage;
+
+typedef enum{
+    IA,
+    IB,
+    IC
+} phase_current;
+
+typedef enum{
+    AH,
+    AL,
+    BH,
+    BL,
+    CH,
+    CL
+} fet_name;
+
 #endif

@@ -24,6 +24,7 @@ void _led_tim_init(struct _led* led){
     led->tim->CCER |= _BV((led->oc - 1) * 4);
     /* set to force inactive (off) */
     _led_modeset(led, LED_OFF);
+    /*_led_modeset(led, LED_BLINK);*/
 
 }
 

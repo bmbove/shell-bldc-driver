@@ -83,6 +83,8 @@ void system_clock_config(void){
 
 void rcc_tim_enable(TIM_TypeDef* TIM){
 
+    if(TIM == TIM1)
+        RCC->APB2ENR |= RCC_APB2ENR_TIM1EN;
     if(TIM == TIM3)
         RCC->APB1ENR1 |= RCC_APB1ENR1_TIM3EN;
     if(TIM == TIM4)
