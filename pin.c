@@ -4,7 +4,7 @@
 #include "rcc.h"
 #include "util.h"
 
-void _set_mode(GPIO_TypeDef *port, uint8_t pin, pin_mode mode){
+void _set_mode(GPIO_TypeDef *port, uint8_t pin, PinMode mode){
 
 	switch(mode){
 		case INPUT:
@@ -31,7 +31,7 @@ void _set_mode(GPIO_TypeDef *port, uint8_t pin, pin_mode mode){
 
 }
 
-void _set_pull(GPIO_TypeDef *port, uint8_t pin, uint8_t pull){
+void _set_pull(GPIO_TypeDef *port, uint8_t pin, PullDir pull){
 
 	switch(pull){
 		case PULLDOWN:
@@ -53,7 +53,7 @@ void _set_pull(GPIO_TypeDef *port, uint8_t pin, uint8_t pull){
 	}
 }
 
-void _pin_init(GPIO_TypeDef *port, uint8_t pin, pin_mode mode, uint8_t pull){
+void _pin_init(GPIO_TypeDef *port, uint8_t pin, PinMode mode, PullDir pull){
 	/* enable peripheral */
 	rcc_gpio_enable(port);
 	/* set mode */
@@ -64,15 +64,15 @@ void _pin_init(GPIO_TypeDef *port, uint8_t pin, pin_mode mode, uint8_t pull){
 	port->OSPEEDR |= _BV((2 * pin) + 1);
 }
 
-void pin_out_init(GPIO_TypeDef *port, uint8_t pin, uint8_t pull){
+void pin_out_init(GPIO_TypeDef *port, uint8_t pin, PullDir pull){
 	_pin_init(port, pin, OUTPUT, pull);
 }
 
-void pin_in_init(GPIO_TypeDef *port, uint8_t pin, uint8_t pull){
+void pin_in_init(GPIO_TypeDef *port, uint8_t pin, PullDir pull){
 	_pin_init(port, pin, INPUT, pull);
 }
 
-void pin_af_init(GPIO_TypeDef *port, uint8_t pin, uint8_t af, uint8_t pull){
+void pin_af_init(GPIO_TypeDef *port, uint8_t pin, uint8_t af, PullDir pull){
 	_pin_init(port, pin, AF, pull);
 
 	if(pin < 8)

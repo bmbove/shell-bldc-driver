@@ -4,7 +4,7 @@
 #include "util.h"
 #include "rcc.h"
 
-void _led_tim_init(struct _led* led){
+void _led_tim_init(struct Led *led){
 
     if(!(led->tim->CR1 & TIM_CR1_CEN)){
         /* enable TIM peripheral */
@@ -24,11 +24,10 @@ void _led_tim_init(struct _led* led){
     led->tim->CCER |= _BV((led->oc - 1) * 4);
     /* set to force inactive (off) */
     _led_modeset(led, LED_OFF);
-    /*_led_modeset(led, LED_BLINK);*/
 
 }
 
-void _led_modeset(struct _led* led, led_mode mode){
+void _led_modeset(struct Led *led, LedMode mode){
 
     uint8_t oc_mode;
 
@@ -63,12 +62,12 @@ void _led_modeset(struct _led* led, led_mode mode){
 }
 
 void _init_led(
-    struct _led*     led,
-    GPIO_TypeDef*    port,
+    struct Led      *led,
+    GPIO_TypeDef    *port,
     uint8_t          pin,
-    TIM_TypeDef*     tim,
+    TIM_TypeDef     *tim,
     uint8_t          oc,
-    led_name         name
+    LedName          name
 ){
     led->port = port;
     led->pin = pin;
@@ -113,13 +112,13 @@ void led_init(void){
     );
 }
 
-void set_debug_led(led_mode mode){
+void led_set_debug(LedMode mode){
     _led_modeset(debug_led, mode);
 }
 
-void toggle_debug_led(void){
+void led_toggle_debug(void){
     if(debug_led->mode == LED_ON)
-        set_debug_led(LED_OFF);
+        led_set_debug(LED_OFF);
     else
-        set_debug_led(LED_ON);
+        led_set_debug(LED_ON);
 }

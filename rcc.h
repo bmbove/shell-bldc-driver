@@ -14,5 +14,6 @@ void system_clock_config(void);
 
 void rcc_tim_enable(TIM_TypeDef* TIM);
 void rcc_gpio_enable(GPIO_TypeDef* GPIO);
+void rcc_adc_enable();
 
 #endif

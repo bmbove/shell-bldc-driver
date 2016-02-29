@@ -29,13 +29,13 @@
 #define BL_PORT         GPIOB
 #define CL_PORT         GPIOB
 
-#define A_CH            1
-#define B_CH            2
-#define C_CH            3
+#define A_OC            1
+#define B_OC            2
+#define C_OC            3
 
 
-struct _fet{
-    fet_name            name;
+struct Fet{
+    FetName             name;
     GPIO_TypeDef*       port;
     uint8_t             pin;
     uint8_t             enabled; 
@@ -43,8 +43,24 @@ struct _fet{
     uint8_t             oc;
     /* inverse- negative side, ie CH3N */
     uint8_t             inv;
-} _fets[6];
+} _fet[6];
 
-struct _fet* fets[6];
+struct Fet *fet[6];
 
+void _fet_TIM_init(void);
+void _init_fet(
+    struct Fet     *fet,
+    FetName         name,
+    GPIO_TypeDef*   port,
+    uint8_t         pin,
+    uint8_t         oc,
+    uint8_t         inv
+);
+
+void fet_init(void);
+void fet_update(void);
+void fet_disable(struct Fet* fet);
+void fet_enable(struct Fet* fet);
+void fet_set_duty(struct Fet* fet, float duty);
+void fet_set_polarity(struct Fet* fet, FetPolarity polarity);
 #endif

@@ -22,30 +22,31 @@
 #define STATUS_B_TIM           TIM3
 #define STATUS_B_OC            4
 
-struct _led{
+struct Led{
     GPIO_TypeDef*       port;
     uint8_t             pin;
-    led_name            led;
-    led_mode            mode;
+    LedName             led;
+    LedMode             mode;
     uint8_t             oc;
     TIM_TypeDef*        tim;
 } _debug_led, _status_led[2];
 
-struct _led* debug_led;
-struct _led* status_led[2];
+struct Led *debug_led;
+struct Led *status_led[2];
 
 void _init_led(
-    struct _led     *led,
+    struct Led      *led,
     GPIO_TypeDef    *port,
     uint8_t          pin,
     TIM_TypeDef     *tim,
     uint8_t          oc,
-    led_name         name
+    LedName          name
 );
-void _led_tim_init(struct _led* led);
-void _led_modeset(struct _led* led, led_mode mode);
+
+void _led_tim_init(struct Led* led);
+void _led_modeset(struct Led* led, LedMode mode);
 void led_init(void);
-void set_debug_led(led_mode mode);
-void toggle_debug_led(void);
+void led_set_debug(LedMode mode);
+void led_toggle_debug(void);
 
 #endif

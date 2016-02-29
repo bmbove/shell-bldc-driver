@@ -5,12 +5,33 @@
 #include "datatypes.h"
 #include "fet.h"
 
-struct _phase{
-    phase_status         status;
-    struct fet            *high;
-    struct fet            *low;
-} _phase_a, _phase_b, _phase_c;
+#ifdef CLOSED_LOOP
+/* 10us Hall Check          */
+#define COM_TIM_CLK     20000000
+#define COM_CLK         100000
+#else
+/* 10ms open loop commutate */
+#define COM_TIM_CLK     2000000
+#define COM_CLK         100
+#endif
 
-struct _phase*  motor_phase[3];
 
+struct MotorStep{
+    struct Phase*       high;
+    struct Phase*        low;
+    struct Phase*        off;
+    uint8_t             hall;
+    struct MotorStep*   prev;
+    struct MotorStep*   next;
+} _com_step[6];
+
+
+struct MotorStep *com_step[6];
+float duty_g;
+
+void _init_com_tim(void);
+void motor_init(void);
+
+void motor_next_step(void);
+void activate_step(struct MotorStep* step);
 #endif
