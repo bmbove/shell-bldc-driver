@@ -21,7 +21,7 @@
 
 uint32_t volatile hall_state;
 void hall_init(void);
-uint32_t get_hall_state(void);
+uint32_t hall_get_state(void);
 void enable_hall_interrupt(void);
 void disable_hall_interrupt(void);
 

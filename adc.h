@@ -55,24 +55,9 @@ struct AdcCh{
     uint8_t           pin;
     ADC_TypeDef      *adc;
     uint8_t            ch;
-} _vp_adc[3], _ip_adc[2], _vbat_adc, _throt_adc, _vn_adc;
+} _adc[8];
 
-/* phase voltages */
-struct AdcCh *vp_adc[3];
-/* phase currents */
-struct AdcCh *ip_adc[2];
-/* other stuff */
-struct AdcCh *vbat_adc, *throt_adc, *vn_adc;
-
-void _init_adc(
-    struct AdcCh     *adc_ch,
-    AdcName          name,
-    GPIO_TypeDef    *port,
-    uint8_t           pin,
-    ADC_TypeDef      *adc,
-    uint8_t            ch
-);
-
+struct AdcCh *adc[8];
 void adc_init(void);
 
 #endif

@@ -19,10 +19,10 @@ int main(void){
     /*led_init();*/
     /***********************************/
 
-    /*led_set_debug(LED_BLINK);*/
+    led_set_debug(LED_BLINK);
 
-    duty_g = 20.0;
-    motor_init();
+    /*duty_g = 20.0;*/
+    /*motor_init();*/
 
     while(1);
 

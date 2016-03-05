@@ -81,7 +81,6 @@ void _fet_TIM_init(void){
 
 
 void _init_fet(
-    struct Fet     *fet,
     FetName         name,
     GPIO_TypeDef*   port,
     uint8_t         pin,
@@ -89,14 +88,17 @@ void _init_fet(
     uint8_t         inv
 ){
 
-    fet->name = name;
-    fet->port = port;
-    fet->pin  = pin;
-    fet->enabled = 0;
-    fet->oc   = oc;
-    fet->inv  = inv;
+    struct Fet *f = &_fet[name];
+    f->name = name;
+    f->port = port;
+    f->pin  = pin;
+    f->enabled = 0;
+    f->oc   = oc;
+    f->inv  = inv;
     /* enable gpio AF (AF 1 for TIM1 pins) */
-    pin_af_init(fet->port, fet->pin, FET_AF, PULLDOWN);
+    pin_af_init(f->port, f->pin, FET_AF, PULLDOWN);
+
+    fet[name] = f;
 }
 
 void fet_init(void){
@@ -106,15 +108,12 @@ void fet_init(void){
      * to their idle state, which should be 'off')
      */
 
-    for(uint8_t i=0; i < 6; i++)
-        fet[i] = &_fet[i];
-
-    _init_fet(fet[AH], AH, AH_PORT, AH_PIN, A_OC, 0); 
-    _init_fet(fet[AL], AL, AL_PORT, AL_PIN, A_OC, 0); 
-    _init_fet(fet[BH], BH, BH_PORT, BH_PIN, B_OC, 0); 
-    _init_fet(fet[BL], BL, BL_PORT, BL_PIN, B_OC, 0); 
-    _init_fet(fet[CH], CH, CH_PORT, CH_PIN, C_OC, 0); 
-    _init_fet(fet[CL], CL, CL_PORT, CL_PIN, C_OC, 0); 
+    _init_fet(AH_FET, AH_PORT, AH_PIN, A_OC, 0); 
+    _init_fet(AL_FET, AL_PORT, AL_PIN, A_OC, 0); 
+    _init_fet(BH_FET, BH_PORT, BH_PIN, B_OC, 0); 
+    _init_fet(BL_FET, BL_PORT, BL_PIN, B_OC, 0); 
+    _init_fet(CH_FET, CH_PORT, CH_PIN, C_OC, 0); 
+    _init_fet(CL_FET, CL_PORT, CL_PIN, C_OC, 0); 
 
     _fet_TIM_init();
 

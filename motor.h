@@ -15,23 +15,10 @@
 #define COM_CLK         100
 #endif
 
-
-struct MotorStep{
-    struct Phase*       high;
-    struct Phase*        low;
-    struct Phase*        off;
-    uint8_t             hall;
-    struct MotorStep*   prev;
-    struct MotorStep*   next;
-} _com_step[6];
-
-
-struct MotorStep *com_step[6];
-float duty_g;
-
-void _init_com_tim(void);
+void motor_enable();
+void motor_disable();
+void motor_latched_shutdown();
+void motor_update_duty(float duty);
 void motor_init(void);
 
-void motor_next_step(void);
-void activate_step(struct MotorStep* step);
 #endif

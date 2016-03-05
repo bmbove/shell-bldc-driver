@@ -23,9 +23,8 @@ struct Phase{
 
 struct Phase* phase[3];
 
-void _init_phase(PhaseName name, FetName high, FetName low, AdcName adc);
-void _phase_set_duty(struct Phase* phase, float duty);
-void _phase_set_mode(struct Phase* phase, PhaseMode mode);
+void phase_set_duty(struct Phase* phase, float duty);
+void phase_set_mode(struct Phase* phase, PhaseMode mode);
 
 void phase_update_state(void);
 void phase_set_state(struct Phase* phase, PhaseMode mode, float duty);

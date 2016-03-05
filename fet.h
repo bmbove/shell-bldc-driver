@@ -49,7 +49,6 @@ struct Fet *fet[6];
 
 void _fet_TIM_init(void);
 void _init_fet(
-    struct Fet     *fet,
     FetName         name,
     GPIO_TypeDef*   port,
     uint8_t         pin,

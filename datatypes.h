@@ -29,29 +29,6 @@ typedef enum{
 } LedMode;
 
 typedef enum {
-    /*Aoff, B off*/
-    NONE=0,
-    /*A solid, B off*/
-    A,
-    /*A solid, B solid*/
-    A_B,
-    /*Aoff, B solid*/
-    B,
-    /*A blink, B off*/
-    ABLINK,
-    /*Aoff, B blink*/
-    BBLINK,
-    /*A solid, B blink*/
-    A_BBLINK,
-    /*A blink, B solid*/
-    ABLINK_B,
-    /*A blink, B blink*/
-    ABLINK_BBLINK,
-    /* A blink, B blink out of phase */
-    ABLINK_BBLINK_OOP
-} StatusLedState;
-
-typedef enum {
     INPUT,
     OUTPUT,
     ADC,
@@ -59,9 +36,9 @@ typedef enum {
 } PinMode;
 
 typedef enum{
-    AP,
-    BP,
-    CP
+    APHASE,
+    BPHASE,
+    CPHASE
 } PhaseName;
 
 typedef enum{
@@ -88,12 +65,12 @@ typedef enum{
 //} phase_current;
 
 typedef enum{
-    AH,
-    AL,
-    BH,
-    BL,
-    CH,
-    CL
+    AH_FET,
+    AL_FET,
+    BH_FET,
+    BL_FET,
+    CH_FET,
+    CL_FET
 } FetName;
 
 typedef enum{
@@ -113,5 +90,14 @@ typedef enum{
     ADC_VN,
     ADC_VBAT
 } AdcName;
+
+typedef enum{
+    STEP0,
+    STEP1,
+    STEP2,
+    STEP3,
+    STEP4,
+    STEP5
+} StepName;
 
 #endif
